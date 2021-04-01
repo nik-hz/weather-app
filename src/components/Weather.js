@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
 
 import { fetchLocation, fetchWeather } from '../actions'
 
@@ -21,18 +23,23 @@ const Weather = ({ fetchLocation, fetchWeather, location, weather }) => {
         e.preventDefault()
         fetchWeather()
     }
+    const onSubmit = (e) => {
+        e.preventDefault()
+        fetchWeather()
+    }
 
     return (
         <div>
             DEMO WEATHER APP
             {/* names are a bit screwed up but well keep location as is with long and lat comp. */}
-            <div>
+            <form onSubmit={(e) => onSubmit(e)}>
+                <TextField type="text" value={'helo'} />
                 location: {location.data ? location.data.city : 'loading'}
-            </div>
+            </form>
             <button onClick={(e) => onClick(e)}>
-                Your location is:
-                {location.data ? location.data.latitude : 'loading'}
-                {location.data ? location.data.longitude : 'loading'}
+                Your location is: {''}
+                {location.data ? location.data.city : 'loading'} {''}
+                {location.data ? location.data.countryName : ''}
             </button>
         </div>
     )

@@ -32,20 +32,29 @@ export const fetchLocation = () => async (dispatch, getState) => {
 
 // make this calle-able with city name and lat+long coords
 export const fetchWeather = () => async (dispatch, getState) => {
+    console.log(process.env.REACT_APP_WEATHER_TOKEN)
     // api.openweathermap.org/data/2.5/weather?id={city id}&appid={API key}
     try {
-        const { city, latitude, longitude } = getState().location.data
+        const {
+            city,
+            countryCode,
+            latitude,
+            longitude,
+        } = getState().location.data
         const weather = await axios.get(
             'https://api.openweathermap.org/data/2.5/weather',
             {
                 params: {
-                    q: city,
+                    // city + country code separated by comma
+                    // should need some custom error handling with circling back to find city without country code
+                    // plus error msg --> fun project idea
+                    q: `${city},${countryCode}`,
                     // lat: latitude,
                     // lon: longitude,
                     // metric changes the units from K to C
                     units: 'metric',
                     // its a free api with 60 calls per minute so here you go, use the key responsibly pls
-                    appid: '386bccd20d1ba060a2c3c46179352d7b',
+                    appid: process.env.REACT_APP_WEATHER_TOKEN,
                 },
             }
         )
