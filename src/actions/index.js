@@ -1,8 +1,12 @@
 import axios from 'axios'
-import { FETCH_LOCATION, FETCH_WEATHER } from '../types'
+import {
+    INITIAL_COORD_LOCATION,
+    FETCH_LOCATION,
+    SET_LOCATION,
+    FETCH_WEATHER,
+} from '../types'
 
-// get location and set state --> this should run on render
-export const fetchLocation = () => async (dispatch, getState) => {
+export const fetchLocation = (city, country) => async (dispatch, getState) => {
     const coords = async () => {
         await navigator.geolocation.getCurrentPosition((pos) => {
             // console.log('from action pos:', pos)
@@ -25,22 +29,22 @@ export const fetchLocation = () => async (dispatch, getState) => {
             },
         }
     )
-
     // location is an object with lat and longitude
-    dispatch({ type: FETCH_LOCATION, payload: position })
+    dispatch({ type: INITIAL_COORD_LOCATION, payload: position })
 }
 
-// make this calle-able with city name and lat+long coords
-export const fetchWeather = () => async (dispatch, getState) => {
-    console.log(process.env.REACT_APP_WEATHER_TOKEN)
+// get location from the text input -> this updates the same location state
+// for this we will use the location setting from the weather API
+// basically getweather will dispatch two actions --> we will run both reducers
+// fetch weather and u[date location in the same time
+
+export const fetchWeatherAndCity = (formCity, formCountry) => async (
+    dispatch,
+    getState
+) => {
     // api.openweathermap.org/data/2.5/weather?id={city id}&appid={API key}
     try {
-        const {
-            city,
-            countryCode,
-            latitude,
-            longitude,
-        } = getState().location.data
+        const { city, countryCode, countryName } = getState().location.data
         const weather = await axios.get(
             'https://api.openweathermap.org/data/2.5/weather',
             {
@@ -48,7 +52,9 @@ export const fetchWeather = () => async (dispatch, getState) => {
                     // city + country code separated by comma
                     // should need some custom error handling with circling back to find city without country code
                     // plus error msg --> fun project idea
-                    q: `${city},${countryCode}`,
+                    q: `${formCity ? formCity : city},${
+                        formCountry ? formCountry : countryName
+                    }`,
                     // lat: latitude,
                     // lon: longitude,
                     // metric changes the units from K to C
@@ -59,7 +65,27 @@ export const fetchWeather = () => async (dispatch, getState) => {
             }
         )
 
-        dispatch({ type: FETCH_WEATHER, payload: weather })
+        console.log(weather)
+        // pluck out the coords from the weather API and call the fetchCoords action
+
+        const position = await axios.get(
+            'https://api.bigdatacloud.net/data/reverse-geocode-client',
+            // ?latitude=37.42159&longitude=-122.0837&localityLanguage=de'
+            {
+                params: {
+                    latitude: weather.data.coord.lat,
+                    longitude: weather.data.coord.lon,
+                    localityLanguage: 'en',
+                },
+            }
+        )
+        // location is an object with lat and longitude
+        dispatch({ type: FETCH_LOCATION, payload: position })
+
+        dispatch(
+            { type: FETCH_WEATHER, payload: weather }
+            // { type: FETCH_LOCATION, payload: weather }
+        )
     } catch (error) {
         console.error(error)
     }
