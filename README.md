@@ -34,7 +34,7 @@ Basically your react app uses *state* to pass data around. Redux is like a toolk
 
 The first thing you need to do with redux is set up your store
 
-````
+````javascript
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
@@ -80,7 +80,7 @@ getState is like using file explorer to browse your harddrive in an action creat
 
 heres an example from my code where I use getState in the second action, to access the state, fetch the user data and fetch the weather from the API. 
 
-````
+````javascript
 const { city, countryCode, countryName } = getState().location.data
         const weather = await axios.get(
 ````
@@ -92,7 +92,7 @@ Now we will go on to make our action creator (there are special steps to using t
 
 If you look inside of the actions folder in this repo, you will see that they look a lot like normal functions, expcept for some small details. The logic is pretty evident so I won't explain it again.
 
-````
+````javascript
 export const fetchLocation = (city, country) => async (dispatch, getState) => {
 
 // Code goes here to do whatever logic you want to run with it
@@ -112,7 +112,7 @@ Reducers are the second thing that Redux is all about. Think of them like robots
 
 Your reducer will take whatever the action sends it, the type will specify what the reducer should do through a switch. 
 
-````
+````javascript
 import { INITIAL_COORD_LOCATION, FETCH_LOCATION } from '../types.js'
 
 export const locationReducer = (state = [], action) => {
@@ -138,7 +138,7 @@ What the reducer does it judge what its getting and then modifying the state acc
 
 You will need to combine your reducers in index,reducers before sending it off to be made into the store (remeber the first boilerplate I showed you)
 
-````
+````javascript
 import { combineReducers } from 'redux'
 
 import { locationReducer } from './locationReducer'
@@ -157,7 +157,7 @@ Now that we've gone through all the setup here's how you use redux with your rea
 
 At the bottom of your app you will see this
 
-````
+````javascript
 const mapStateToProps = (state) => {
     return {
         // notice these are in files named ...Reducer, but the name is changed in index.js reducers
@@ -179,7 +179,7 @@ the first thing we pass into it in this case is a function called mapStateToProp
 
 #### Actually calling action creators in your components!
 
-````
+````javacript
     useEffect(() => {
         fetchLocation()
         console.log('fetchLocation ran in Weather useEffect hook')
