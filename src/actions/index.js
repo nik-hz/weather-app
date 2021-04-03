@@ -61,7 +61,7 @@ export const fetchWeatherAndCity = (formCity, formCountry) => async (
                     // metric changes the units from K to C
                     units: 'metric',
                     // its a free api with 60 calls per minute so here you go, use the key responsibly pls
-                    appid: process.env.REACT_APP_WEATHER_TOKEN,
+                    appid: '386bccd20d1ba060a2c3c46179352d7b',
                 },
             }
         )
