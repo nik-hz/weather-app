@@ -179,7 +179,7 @@ the first thing we pass into it in this case is a function called mapStateToProp
 
 #### Actually calling action creators in your components!
 
-````javacript
+````javascript
     useEffect(() => {
         fetchLocation()
         console.log('fetchLocation ran in Weather useEffect hook')
