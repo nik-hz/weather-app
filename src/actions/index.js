@@ -46,6 +46,7 @@ export const fetchWeatherAndCity = (formCity, formCountry) => async (
     try {
         const { city, countryCode, countryName } = getState().location.data
         const weather = await axios.get(
+            // 'https://api.openweathermap.org/data/2.5/onecall',
             'https://api.openweathermap.org/data/2.5/weather',
             {
                 params: {
