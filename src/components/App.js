@@ -193,7 +193,7 @@ App.propTypes = {}
 
 const mapStateToProps = (state) => {
     return {
-        // notice these are in files named ...Reducer, but the name is changed in index.js reducers
+        // this way we can use our state in react components
         location: state.location,
         weather: state.weather,
     }
