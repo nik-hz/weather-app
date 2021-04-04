@@ -7,7 +7,7 @@ Use this as a simple guide to using redux in your projects (I am by no means ver
 
 ## Description
 
-the app fetches user location, using geolocation and then calls the openweather API to fetch current weather at the users location. My personal API key is included (the API is free for 60 calls per minute) 
+the app fetches user location, using geolocation and then calls the openweather API to fetch current weather at the users location. My personal API key is not included (the API is free for 60 calls per minute so just go make your own) 
 
 Main point of this project is as a practice for Redux, and a simple guide for those who don't really understand it yet. (more on Redux below)
 
