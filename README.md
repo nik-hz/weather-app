@@ -203,6 +203,4 @@ my submit handler calls the second action with the data that the user passed int
 
 # And there you have it :) 
 I hope this helps someone who's as lost as I was when I started with Redux. 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
