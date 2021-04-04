@@ -174,7 +174,7 @@ export default connect(mapStateToProps, { fetchLocation, fetchWeatherAndCity })(
 ````
 connect is a boilerplate function that is like the USB port on your computer where your harddrive plugs in. 
 
-![Alt Text](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fmildlyinfuriating%2Fcomments%2F2dwpei%2Fthis_repeating_gif_of_a_usb_plugin_process%2F&psig=AOvVaw11G45-T_HK2Omimc2kYJSs&ust=1617575703345000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIj71ZyR4-8CFQAAAAAdAAAAABAD)
+![Alt Text](https://i.imgur.com/8eKLSMk.gif)
 
 the first thing we pass into it in this case is a function called mapStateToProps, which makes the state (data on your redux store / harddrive) usable as props (remember props are what your react components use). the second thing I pass through is an object with my actions. This makes my actions usable in the component like normal functions which I can invoke. Finally we connect (the function is called connect for a reason) to our component, which I call App. 
 
