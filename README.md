@@ -4,6 +4,8 @@ This project is made using React js and Redux for state management.
 
 Use this as a simple guide to using redux in your projects (I am by no means very proficient in Redux, so treat this as a guide for beginners by beginners)
 
+heres a link to the site deployed on github pages https://nik-hz.github.io/weather-app/ styling was not the purpose of this lol, but it looks decent on mobile format...
+
 check out my blog (it's new so it looks a bit meh) for more content [https://fullstackdoge.wordpress.com/]
 
 ## Description
